@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 문법</title>
+</head>
+<body>
+    <h1>자바스크립트 기본문법</h1>
+    <p>
+        자바스크립트 주석 <br>
+        - 한주 주석 : // <br>
+        - 범위 주석 : /*  */ <br>
+        변수 선언 <br>
+        변수 종류 : 멤버변수와 지역변수 <br>
+        변수에 대한 자료형을 선언하지 않음 (자료형은 존재) <br>
+    </p>
+    <h3>변수 명명 규칙</h3>
+    <pre>
+    1. 영어 대/소문자, 숫자, _(언더스코어), $ 사용가능
+    2. 첫글자 숫자 사용 불가
+    3. 공백을 포함한 특수 문자 사용불가
+    4. 이름에 의미있는 단어의 조합 권장
+    5. 예약어 사용불가
+    6. 두 단어 이상 결합 시 낙타표기법 권장
+    7. 한글 사용가능
+    8. 생성자 함수의 이름을 항상 대문자로 시작
+    9. 변수, 인스턴스, 함수, 메소드는 항상 소문자로 시작
+    </pre>
+    <h3>숫자(Number)</h3>
+    <p>
+        - 정수형 숫자와 부동소수점 숫자로 구분 <br>
+        - 내장객체로  Math 객체 제공, 기본 메소드 존재 <br>
+        - Math.abs() : 절대값, random() : 난수, 
+        round() : 반올림, floor() : 버림, ceil() : 올림
+    </p>
+    <h3>문자열(String)</h3>
+    <p>
+        " "로 묶여있는 리터럴 값, 내장객체 String이며 기본적인 메소드가 존재 <br>
+        toUpperCase(), toLowerCase(), length, indexOf(), lastIndexOf(), subString(), split(),...
+    </p>
+    <h3>형 변환</h3>
+    <h5>숫자 -> 문자열</h5>
+    <p>
+        1. 숫자와 문자열을 + 연산하게 되면 문자열이 우선되어 숫자를 문자로 변환 <br>
+        2. 강제 형변환 : String() 생성자 함수를 이용
+    </p>
+    <h5>문자열 -> 숫자</h5>
+    <p>
+        숫자, 문자 + 이외에 사칙연산시 숫자가 우선되어 문자를 숫자로 변환 <br>
+        강제 형변환 함수 이용 : Number(), parseInt() 등
+    </p>
+    <h3>제어문</h3>
+    <p>
+        1. 조건문 : if, if~else, if~else if ~ else, switch <br>
+        2. 반복문 : for, while, do~while, for in <br>
+        3. 분기문 : continue, break <br>
+    </p>
+
+    <script>
+
+
+        // alert("테스트입니다."); // 알림창
+        // var yesOrNo = confirm("확인하셨습니까?"); // 알림창 return:boolean
+        // console.log("여부 : " + yesOrNo);
+        var k = 0;
+        do{
+            console.log((k+1)+"번째 출력");
+            k++;
+        }while(k < 10);
+        
+        console.log("-----");
+
+        var j = 0;
+        // continue, break를 통해 조건에 따라 코드를 제어할 수 있음.
+        while(j < 10){
+            j++;
+            if(j % 2 == 0) continue; // 이하 코드를 스킵
+            console.log((j+1) + "번째 반복중");
+            if(j > 7) break; // 멈추기
+        }
+
+
+        for(var i = 0; i < 10; i++){
+            console.log(i);
+        }        
+
+
+        function basicControlIf(){
+            var inputVal = prompt("값을 입력해주세요."); // string 입력 받음
+            console.log("값 : " + inputVal);
+            // if(inputVal == 1){
+            //     console.log("1 입력시 실행될 코드");
+            // }else if(inputVal == 2){
+            //     console.log("2 입력시 실행될 코드");
+            // }else if(inputVal == 3){
+            //     console.log("3 입력시 실행될 코드");
+            // }else{
+            //     console.log("1~3 이외의 수 입력시 실행될 코드");
+            // }
+    
+            // inputVal은 String값임.
+            switch (inputVal) {
+                case "1":
+                    basicNumber(); 
+                    break;
+                    
+                case "2":
+                    basicStrMethod(); 
+                    break;
+                    
+                case "3":
+                    basicTrans(); 
+                    break;
+                    
+                default:
+                    basicGrammer();
+                    break;
+            }
+        }
+
+
+
+        function basicStrMethod(){
+            var moonja = "Hello, JavaScript, world";
+            // moonja = new String("Hello, JavaScript, world");
+            var upperMoonja = moonja.toUpperCase();
+            console.log("문자열 : "+moonja);
+            console.log("대문자 만들기 : "+upperMoonja);
+            var lowerMoonja = moonja.toLowerCase();
+            console.log("소문자 만들기 : "+lowerMoonja);
+            var moonjaLength = moonja.length;
+            console.log("문자열 길이 : " + moonjaLength);
+            var indexMoonja = moonja.indexOf("l");
+            console.log("문자 위치 : "+indexMoonja);
+            var subMoonja = moonja.substring(7, 17); // 7번 인덱스 포함
+            console.log("문자열 자르기 : "+subMoonja);
+            var splitMoonja = moonja.split(",");
+            console.log("문자열 찢기 : "+ splitMoonja[0]);
+        }
+
+        function basicTrans(){
+            console.log("행운의 숫자 : " + 7);
+            var trans1 = 7 + 7;
+            var trans2 = 7 + "7";
+            var trans3 = 7 + 7 + "7";
+            var trans4 = "7" + 7 + 7;
+            var trans5 = "7" + (7 + 7);
+            var trans6 = parseInt("7") + 7 + 7;
+            var trans7 = Number("7") + 7 + 7;
+            console.log("7 + 7 = " + trans1);
+            console.log("7 + '7' = " + trans2);
+            console.log("7 + 7 + '7' = " + trans3);
+            console.log("'7' + 7 + 7 = "+trans4);
+            console.log("'7' + (7 + 7) = "+trans5);
+            console.log("parseInt('7') + 7 + 7 = "+trans6);
+            console.log("Number('7') + 7 + 7 = "+trans7);
+            // 문자열 => 숫자, parseInt, Number
+            var dataStr1 = "2024년도";
+            var dataStr2 = "제2024년도";
+            console.log("parseInt('2024년도') : "+parseInt(dataStr1)); // 성공 2024
+            console.log("Number('제2024년도') : " + Number(dataStr2)); // NaN
+            console.log("parseInt('제2024년도') : "+parseInt(dataStr2));// NaN
+    //      숫자로 시작하는 문자열이면 parseInt 가능
+    //      Number로는 문자열이면 무조건 안됨.
+        }
+        function basicNumber(){
+            var pNum = 30;
+            var absVal = Math.abs(-10);
+            console.log("절대값 : "+ absVal);
+            var randVal = Math.random()*10 + 1;
+            console.log("랜덤값 : " + randVal);
+            var roundVal= Math.round(5.7);
+            console.log("반올림값 : "+roundVal);
+            var floorVal = Math.floor(10.23);
+            console.log("버림값 : "+floorVal);
+            var ceilVal = Math.ceil(4.2);
+            console.log("올림값 : "+ceilVal);
+        }
+
+
+
+
+        function basicGrammer(){
+            var num;
+            var number;
+            var soojja;
+            num = 507;
+            number = 1023;
+            soojja = 5.0;
+
+            num = "Hello, Javascript"
+            number = true;
+            soojja = false;
+            // 정수, 실수, 문자열, 불린값 ... 
+            console.log(num);
+            console.log(number);
+            console.log(soojja);
+
+            var result = (0 != 1);
+            console.log("result : "+result);
+        }
+
+
+    </script>
+</body>
+</html>
