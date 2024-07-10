@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나이 계산기</title>
+</head>
+<body>
+    <div id="result"></div>
+
+    <script>
+        var result = document.querySelector("#result");
+        var currentYear = new Date();
+
+        function callPrompt(){
+            var year = window.prompt("당신이 태어난 연도를 입력하세요(YYYY)");
+            if(!year){
+                result.innerHTML = `<button onclick="callPrompt()">다시하기</button>`;
+            }else{
+                result.innerHTML = `${currentYear.getFullYear()}년 현재<br>
+                ${year}년에 태어난 사람은 만${currentYear.getFullYear() - year}세 입니다.`;
+            }
+        }
+
+        window.addEventListener('load',callPrompt());
+
+    </script>
+</body>
+</html>

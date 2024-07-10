@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단 출력하기3</title>
+    <style>
+        .danBox{
+            margin: 10px;
+            float: left;
+        }
+        th{
+            background-color: rgb(214, 214, 214);
+            padding: 5px;
+        }
+        td{
+            padding: 5px;
+        }
+        .danBox, tr{
+            border: 3px solid gray;
+            border-collapse: collapse;
+        }
+        .container{
+            text-align: center;
+            margin: auto;
+            width: 1000px;
+            height: 400px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container containerTop"></div>
+    <div class="container containerBottom"></div>
+    <script>
+        var containerTop = document.querySelector('.containerTop');
+        var containerBottom = document.querySelector('.containerBottom');
+        
+        for(var dan = 2; dan < 10; dan++){
+            var table = document.createElement('table');
+            table.setAttribute("class", 'danBox');
+            table.innerHTML= `<tr><th>${dan}단</th></tr>`
+
+            if(dan < 6){
+                containerTop.appendChild(table);
+            }else{
+                containerBottom.appendChild(table);
+            }
+
+            for(var i = 1; i < 10; i++){
+                var tr = document.createElement('tr');
+                table.appendChild(tr);
+                
+                tr.innerHTML += `
+                    <td>${dan} * ${i} = ${dan * i}</td>
+                `;
+            }    
+            
+
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>factorial 계산하기</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #h1Btn{
+            width: 500px;
+            border-radius: 4px;
+            margin: auto;
+            background-color: rgb(255, 198, 129);
+        }
+        #h1Btn:hover{
+            cursor: pointer;
+        }
+        #h1Btn:active{
+            color:rgb(255, 226, 191);
+            user-select: none;
+            transform: translate(2px,2px);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="h1Btn">while문을 사용한 팩토리얼 계산</h1>
+    <div id="result"></div>
+    <script>
+        var result = document.querySelector('#result');
+        var h1Btn = document.querySelector('#h1Btn');
+        
+        // addEventListenr(event, functionName)
+        // function의 이름이나 직접 함수를 정의하는 코드를 적어야 됨.
+        // 만약 function()의 형태로 호출하는 코드를 넣게 되면 함수를 호출한 후 return값을 
+        // 전달하게 됨.
+
+        // addEventListener엔 함수의 참조를 전달해줘야 함!!
+
+        // => 이벤트가 발생했을 때 참조할 함수를 전달해야 하는것!!!
+        // 만약 함수의 참조를 return하는 함수라면 함수 호출 코드 써도 됨.(단, 호출함수(그 안의 로직이) 먼저 즉시 실행된다는 점 기억!)
+        h1Btn.addEventListener('click',runFactorialCalc);
+
+
+        function runFactorialCalc(e){
+            console.log(e.target);
+            var inputNum = window.prompt("숫자를 입력해주세요","10");
+            var i = 0;
+            var resultNum = 1;
+        
+            while(i < inputNum){
+                i++
+                resultNum *= i;
+            }
+
+            result.innerHTML = `${inputNum}! = ${resultNum}`;
+        }
+
+    </script>
+</body>
+</html>

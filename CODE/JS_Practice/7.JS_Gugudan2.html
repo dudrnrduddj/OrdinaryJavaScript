@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .danBox{
+            border: 3px solid gray;
+            height: 300px;
+            width: 200px;
+            text-align: center;
+            float: left;
+            margin: 10px;
+        }
+
+        .container{
+            margin: auto;
+            width: 1000px;
+            height: 300px;
+        }
+        
+        
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="container containerTop"></div>
+    <div class="container containerBottom"></div>
+
+    <script>
+        var body = document.querySelector('body');
+        for(var dan = 2; dan < 10; dan++){
+            var div = document.createElement('div');
+            div.setAttribute('class', `danBox danBox${dan}`)
+            body.appendChild(div);
+            var danBox = document.querySelector(`.danBox${dan}`);
+            danBox.innerHTML = `<h2>${dan}단</h2>`;
+            if(dan <= 5){
+                var containerTop = document.querySelector('.containerTop');
+                containerTop.appendChild(div);
+            }else{
+                var containerBottom = document.querySelector('.containerBottom');
+                containerBottom.appendChild(div);
+            }
+            for(var num = 1; num < 10; num++){
+                danBox.innerHTML += `${dan} * ${num} = ${dan*num}<br>`;
+            }
+        }
+    </script>
+</body>
+</html>
