@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Object Model</title>
+</head>
+<body>
+    <h1>윈도우 객체</h1>
+    <p>window 객체는 자바스크립트의 최상위 객체이며, BOM, DOM으로 나뉜다</p>
+    <p>브라우저 창에 대한 설정을 하는 객체</p>
+    <button onclick="callAlert();">alert 확인</button> <br><br>
+    <button onclick="callConfirm();">cofirm 확인</button> <br><br>
+    <button onclick="callPrompt();">prompt 확인</button> <br><br>
+    <button onclick="callOpen();">open 확인</button> <br><br>
+    <button onclick="callClose();">close 확인</button> <br><br>
+    <button onclick="callTimeout();">setTimeout 확인</button>
+    <button onclick="callInterval();">setInterval 확인</button> <br><br>
+    <button onclick="callClearInterval();">clearInterval 확인</button> <br><br>
+    <button onclick="startClock();">디지털 시계 On</button> <br><br>
+    <button onclick="stopClock();">디지털 시계 Off</button> <br><br>
+
+    <div id="clockArea" style="background-color:#ccc; width: 300px; height: 100px; font-size: 30px; border:1px solid #222; color:#222; text-align: center; line-height: 90px;">00:00:00</div>
+
+    <br><br><br>
+    <hr>
+    <h3>navigator 객체</h3>
+    <p>
+        웹 페이지를 실행하고 있는 브라우저에 대한 정보를 가지고 있는 객체
+    </p>
+    <button onclick="checkNavigator();">navigator 객체 확인</button>
+    <h3>screen 객체</h3>
+    <p>
+        웹 브라우저 화면이 아닌 운영체제 화면의 속성을 가진 객체
+    </p>
+    <button onclick="checkScreen();">screen 객체 확인</button>
+
+    <button onclick="location.reload();">location 확인 (location.reload())</button> <br>
+    <button onclick="checkHref('http://www.naver.com');">href 페이지 이동</button> <br>
+    <button onclick="checkAssign('http://www.daum.net')">assign 페이지 이동</button> <br>
+    <button onclick="checkReplace('http://www.naver.com')">replace 페이지 이동</button> <br>
+
+    <h3>history 객체</h3>
+    <p>
+        현재 창에서 사용자의 방문 기록을 저장함. <br>
+        뒤로가기, 앞으로가기, 새로고침 가능
+    </p>
+    <button onclick="javascript:console.log(history);">history 객체 확인</button>
+    <button onclick="goBack(-1);">뒤로가기 확인</button>
+
+    <!-- browser object model 
+    우리가 사용하고 있는 이 함수들을 라이브러리 또는 Web API라고 부른다. -->
+    
+    <script>
+        function goBack(num){
+            //history.go() : 새로고침, go(-1) : 뒤로가기, go(1) : 앞으로 가기
+            history.go(num);
+        }
+
+
+        function checkReplace(url){
+            // 페이지 이동 (전달값 이용)
+            // 뒤로가기가 불가능함.
+            location.replace(url);
+        }
+
+        function checkAssign(url){
+            // 페이지 이동(전달값 이용)
+            location.assign(url)
+        }
+
+        function checkHref(url){
+            // 페이지 이동(속성값 이용)
+            location.href = url;
+        }
+
+
+        function checkScreen(){
+            console.log(screen);
+        }
+
+
+        function checkNavigator(){
+            console.log(navigator);
+            // 💥💥웹 브라우저를 식별할 수 있는 정보💥💥 상식 ❗❗❗
+            console.log(navigator.userAgent);
+        }
+
+
+
+        var clockTime;
+        var clockDiv = document.querySelector("#clockArea");
+
+        function stopClock(){
+            clearInterval(clockTime);
+            clockDiv.innerText = "STOP";
+        }
+
+        function startClock(){
+                clockTime = window.setInterval(()=>{
+                var hour = new Date().getHours();
+                var min = new Date().getMinutes();
+                var sec = new Date().getSeconds();
+                clockDiv.innerText = `${hour}:${min}:${sec}`;
+            }, 1000);
+            
+        }
+
+
+
+        var myWindow;
+        var myInterval;
+
+        function callClearInterval(){
+            window.clearInterval(myInterval);
+        }
+
+        function callInterval(){
+            //일정 시간마다 반복 동작
+
+            myInterval = window.setInterval(function(){
+                console.log(`hi`);
+            }, 1000);
+        }
+
+        function callTimeout(){
+            var sec = 3000;
+            alert(`바로 동작합니다. -> 확인을 누른 후 ${sec/1000}초 후 창이 닫힙니다..`);
+            window.setTimeout(()=>{
+                myWindow.close();
+            }, sec);
+            // 1000ms = 1s
+        }
+
+
+        
+        
+        function callClose(){
+            //window.open(url, name, option);
+            myWindow.close();
+//             _blank : 새 창으로 연다. (기본값)
+//  _parent : 부모 프레임에 열린다.
+//  _self : 현재 페이지를 대체한다.
+//  _top : 로드된 프레임셋을 대체한다.
+//  name(임의의 이름) : 새 창이 열리고 창의 이름을 지정한다. 동일한 이름에 다시 open() 을 하면 기존의   열린창의 내용이 바뀐다. 다른 이름을 사용하면 또다른 새창이 열린다.
+        }
+
+        function callOpen(){
+            // screen 객체 활용 - 열리는 창 화면 정가운데로 나타내기
+            var left = (screen.width - 500)/2;
+            var top = (screen.height - 600)/2;
+            myWindow = window.open("./2.JS_DOM.html","pop",`width=500,height=600, left=${left}, top=${top}`); // 자바스크립트에선 객체가 생성됨.(브라우저에선 url의 창이 열림)
+        }
+
+        function callPrompt(){
+            var num = window.prompt("좋아하는 숫자를 입력하세요.");
+            console.log(num);
+        }
+
+
+
+        function callConfirm(){
+            // window.confirm("확인하셨습니까?");
+            var check = confirm("확인하셨습니까?"); // window 생략 가능
+            console.log(check);
+            if(check == true){
+                console.log("확인");
+            }else{
+                console.log("취소");
+            }
+        }
+
+        function callAlert(){
+            alert('alert 확인');
+        }
+
+    </script>
+</body>
+</html>
