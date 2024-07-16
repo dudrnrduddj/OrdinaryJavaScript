@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자스 배열 문제3</title>
+    <style>
+        .divss {
+            float: left;        
+        }
+    </style>
+</head>
+<body>
+    <h1> 배열 실습 문제 3</h1>
+    <br><br>
+    문제5. 다음 보기의 그림을 클릭하면 그림이 사라지고 그림을 모두 클릭하면 클릭한 순서대로 그림이 나올수 있도록 만들어라.<br>
+    <fieldset>
+        <legend>보기</legend>
+        <div id="div5">
+            <div style="border:1px solid black; height:100px; width:100px; background-color:red;" class="divss" onclick="clickDiv('red')" id="red" ;></div>
+            <div style="border:1px solid black; height:100px; width:100px; background-color:blue;" class="divss" onclick="clickDiv('blue')" id="blue" ;></div>
+            <div style="border:1px solid black; height:100px; width:100px; background-color:green;" class="divss" onclick="clickDiv('green')" id="green" ;></div>
+            <div style="border:1px solid black; height:100px; width:100px; background-color:pink;" class="divss" onclick="clickDiv('pink')" id="pink" ;></div>
+            <div style="border:1px solid black; height:100px; width:100px; background-color:yellow;" class="divss" onclick="clickDiv('yellow')" id="yellow" ;></div>
+        </div>
+    </fieldset><br>
+    <script>
+        //내가 쓴 코드
+
+        // var div5 = document.querySelector('#div5');
+        // var removeDiv = new Array();
+        
+        // function clickDiv(color){
+        //     removeDiv.push(div5.removeChild(document.querySelector('#'+color)));
+        //     if(div5.firstElementChild==null){
+        //         for(var i = 0; i < removeDiv.length; i++){
+        //             div5.appendChild(removeDiv[i]);
+        //         }
+        //     }
+        // }
+
+
+        // 안보이게 함  display : none
+        // 사라진 것은 새로운 배열에 담기
+        // 다 담았는지 체크(index로 체크)
+        // 다 담았으면 출력 문자열로 누적합시켜서 outerHTML활용
+        // 💥outerHTML은 선택된 요소 자체를 포함한 HTML 콘텐츠를 반환
+        // 💥innerHTML은 선택된 요소의 내부 HTML 콘텐츠를 반환
+        // index 초기화
+        // 배열, 문자열 초기화
+        
+        // 수업 중 코드
+        var index = 0;
+        var arr = new Array();
+
+        function clickDiv(color){
+            var selected = document.querySelector('#'+color);
+            selected.style.display = "none";
+
+            index++;
+            arr.push(selected);
+            if(index == 5){
+                var str = "";
+                for(var i = 0; i < arr.length; i++){
+                    arr[i].style.display = "block";
+                    str += arr[i].outerHTML;
+                }
+                var div5 = document.querySelector('#div5');
+                div5.innerHTML = str;
+                index = 0;
+                arr=[];
+            }
+        }
+    </script>
+</body>
+</html>

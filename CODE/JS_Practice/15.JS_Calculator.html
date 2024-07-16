@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간이 계산기 만들기</title>
+</head>
+<body>
+    <h1>간이 계산기 만들기</h1>
+    첫번째 값 : <input type="text" id="input1"> <br>
+    두번째 값 : <input type="text" id="input2"> <br>
+    <button onclick="calculate('+');">+</button>
+    <button onclick="calculate('-');">-</button>
+    <button onclick="calculate('*');">*</button>
+    <button onclick="calculate('/');">/</button>
+    <button onclick="calculate('%');">%</button>
+    <br><br>
+    계산결과 : <span id="result"></span>
+    <script>
+        function calculate(operator){
+            var num1 = parseInt(document.querySelector("#input1").value);
+            var num2 = parseInt(document.querySelector("#input2").value);
+            var result;
+            
+            switch(operator){
+                case '+' : 
+                    result = num1 + num2;
+                    break;
+                case '-' : 
+                    result = num1 - num2;
+                    break;
+                case '*' :
+                    result = num1 * num2;
+                    break;
+                case '/' : 
+                    result = num1 / num2;
+                    break;
+                case '%' :
+                    result = num1 % num2;    
+                    break;
+            }
+            var spanTag = document.querySelector('#result'); 
+            spanTag.innerText = result;
+        }
+    </script>
+</body>
+</html>
